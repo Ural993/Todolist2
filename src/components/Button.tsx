@@ -1,7 +1,10 @@
 import React from 'react'
+import { FilterValuesType } from '../App'
+import './Todolist.css'
 type PropsType = {
     name: string
     callBack: () => void
+    style: string
 }
 
 export const Button = (props: PropsType) => {
@@ -9,6 +12,6 @@ export const Button = (props: PropsType) => {
         props.callBack()
     }
     return (
-        <button onClick={onClickHandler}>{props.name}</button>
+        <button onClick={onClickHandler} className={props.style}>{props.name}</button>
     )
 }

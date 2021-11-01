@@ -25,23 +25,13 @@ function App() {
         let newTasks = [task, ...tasks];
         setTasks(newTasks);
     }
-
-    // let [filter, setFilter] = useState<FilterValuesType>("all");
-
-    // let tasksForTodolist = tasks;
-
-    // if (filter === "active") {
-    //     tasksForTodolist = tasks.filter(t => t.isDone === false);
-    // }
-    // if (filter === "completed") {
-    //     tasksForTodolist = tasks.filter(t => t.isDone === true);
-    // }
-
-    // function changeFilter(value: FilterValuesType) {
-    //     setFilter(value);
-    // }
-
-
+    function changeCheckbox(taskId: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === taskId)
+        if (task) {
+            task.isDone = isDone
+        }
+        setTasks([...tasks])
+    }
 
     return (
         <div className="App">
@@ -49,7 +39,9 @@ function App() {
                 tasks={tasks}
                 removeTask={removeTask}
                 //changeFilter={changeFilter}
-                addTask={addTask} />
+                addTask={addTask}
+                changeCheckbox={changeCheckbox} />
+
         </div>
     );
 }

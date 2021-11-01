@@ -1,32 +1,37 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react"
-import { Button } from "./Button"
+import './Todolist.css'
 
 type PropsType = {
-    addTask: (title: string) => void
+    addTask: () => void
     title: string
     setTitle: (title: string) => void
+    error: string | null
+    setError: (error: string | null) => void
 }
 
-export const FullInput = ({ setTitle, title, ...props }: PropsType) => {
+export const Input = ({ setTitle, title, error, setError, ...props }: PropsType) => {
 
 
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.charCode === 13) {
-            addTask();
+            props.addTask();
         }
     }
-    const addTask = () => {
-        props.addTask(title);
-        setTitle("");
-    }
-    return (
+
+    return (<>
+
         <input value={title}
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}
+            className={error ? 'error' : ''}
         />
+        {error && <div className={'errorMessage'}>{error}</div>}
+    </>
     )
 }
